@@ -1,0 +1,27 @@
+%%%-------------------------------------------------------------------
+%%% -*- coding: utf-8 -*-
+%%% @author Nikita Roshchupkin
+%%% @copyright (C) 2015, Eltex, Novosibirsk, Russia
+%%% @doc
+%%%
+%%% @end
+%%% Created : Jul 2015
+%%%-------------------------------------------------------------------
+{application, testing, [
+    {description, "My testing of various servers"},
+    {id,"testing"},
+    {modules, []},
+    {registered,[]},
+    {included_applications,[]},
+    {applications,
+        [
+            kernel,
+            stdlib,
+            lager,
+            chronica
+        ]
+    },
+
+    {mod, {testing_app,[]}},
+    {vsn, "1.0"}
+]}.
