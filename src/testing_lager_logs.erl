@@ -89,16 +89,16 @@ start_test_ONE_thread_ONE_log_file() ->
     {R1_ARG1, R2_ARG1, R3_ARG1, R4_ARG1, R5_ARG1, R6_ARG1,
      R1_ARG2, R2_ARG2, R3_ARG2, R4_ARG2, R5_ARG2, R6_ARG2} = gen_server:call(?MODULE, one_thread_one_log, infinity),
 
-    file:write_file("Benchmark", io_lib:fwrite("testing_short_message_file Reductions for one thread and many threads ~p\n",
-        [R2_ARG1 + R2_ARG2 - R1_ARG1 - R1_ARG2]), [append]),
+    file:write_file("Benchmark", io_lib:fwrite("testing_short_message_file Reductions for one thread and many threads\n"
+                                                            "~p\n", [R2_ARG1 + R2_ARG2 - R1_ARG1 - R1_ARG2]), [append]),
     file:write_file("Benchmark", "-------------------------------------------------------------------------------------\n", [append]),
 
-    file:write_file("Benchmark", io_lib:fwrite("testing_long_message_file Reductions for one thread and many threads ~p\n",
-        [R4_ARG1 + R4_ARG2 - R3_ARG1 - R3_ARG2]), [append]),
+    file:write_file("Benchmark", io_lib:fwrite("testing_long_message_file Reductions for one thread and many threads\n"
+                                                            "~p\n", [R4_ARG1 + R4_ARG2 - R3_ARG1 - R3_ARG2]), [append]),
     file:write_file("Benchmark", "-------------------------------------------------------------------------------------\n", [append]),
 
-    file:write_file("Benchmark", io_lib:fwrite("testing_formater_message_file Reductions for one thread and many threads ~p\n",
-        [R6_ARG1 + R6_ARG2 - R5_ARG1 - R5_ARG2]), [append]).
+    file:write_file("Benchmark", io_lib:fwrite("testing_formater_message_file Reductions for one thread and many threads\n"
+                                                                "~p\n", [R6_ARG1 + R6_ARG2 - R5_ARG1 - R5_ARG2]), [append]).
 
 reductions_test_ONE_thread_ONE_log_file() ->
     [{_, R1_ARG1}] = erlang:process_info(self(), [reductions]),
@@ -128,16 +128,16 @@ start_test_ONE_thread_MANY_log_files() ->
     {R1_ARG1, R2_ARG1, R3_ARG1, R4_ARG1, R5_ARG1, R6_ARG1,
      R1_ARG2, R2_ARG2, R3_ARG2, R4_ARG2, R5_ARG2, R6_ARG2} = gen_server:call(?MODULE, one_thread_many_log, infinity),
 
-    file:write_file("Benchmark", io_lib:fwrite("testing_short_message_file Reductions for one thread and many threads ~p\n",
-        [R2_ARG1 + R2_ARG2 - R1_ARG1 - R1_ARG2]), [append]),
+    file:write_file("Benchmark", io_lib:fwrite("testing_short_message_file Reductions for one thread and many threads\n"
+                                                            "~p\n", [R2_ARG1 + R2_ARG2 - R1_ARG1 - R1_ARG2]), [append]),
     file:write_file("Benchmark", "-------------------------------------------------------------------------------------\n", [append]),
 
-    file:write_file("Benchmark", io_lib:fwrite("testing_long_message_file Reductions for one thread and many threads ~p\n",
-        [R4_ARG1 + R4_ARG2 - R3_ARG1 - R3_ARG2]), [append]),
+    file:write_file("Benchmark", io_lib:fwrite("testing_long_message_file Reductions for one thread and many threads\n"
+                                                            "~p\n", [R4_ARG1 + R4_ARG2 - R3_ARG1 - R3_ARG2]), [append]),
     file:write_file("Benchmark", "-------------------------------------------------------------------------------------\n", [append]),
 
-    file:write_file("Benchmark", io_lib:fwrite("testing_formater_message_file Reductions for one thread and many threads ~p\n",
-        [R6_ARG1 + R6_ARG2 - R5_ARG1 - R5_ARG2]), [append]).
+    file:write_file("Benchmark", io_lib:fwrite("testing_formater_message_file Reductions for one thread and many threads\n"
+                                                                "~p\n", [R6_ARG1 + R6_ARG2 - R5_ARG1 - R5_ARG2]), [append]).
 
 reductions_test_ONE_thread_MANY_log_files() ->
     [{_, R1_ARG1}] = erlang:process_info(self(), [reductions]),
@@ -229,15 +229,18 @@ handle_call({result, HeadTime_R1, HeadTime_R2, HeadTime_R3}, _From,
     case NewState#config_state.number =:= R1 of
         true ->
             SumTime_R1 = lists:sum(NewState#config_state.buffertime_r1),
-            file:write_file("Benchmark", io_lib:fwrite("testing_short_message_file AverageTime ~p ms\n", [SumTime_R1/101/1000]), [append]),
+            file:write_file("Benchmark", io_lib:fwrite("testing_short_message_file AverageTime\n"
+                                                    "~p ms\n", [SumTime_R1/101/1000]), [append]),
             file:write_file("Benchmark", "-------------------------------------------------------------------------------------\n", [append]),
 
             SumTime_R2 = lists:sum(NewState#config_state.buffertime_r2),
-            file:write_file("Benchmark", io_lib:fwrite("testing_long_message_file AverageTime ~p ms\n", [SumTime_R2/101/1000]), [append]),
+            file:write_file("Benchmark", io_lib:fwrite("testing_long_message_file AverageTime\n"
+                                                    "~p ms\n", [SumTime_R2/101/1000]), [append]),
             file:write_file("Benchmark", "-------------------------------------------------------------------------------------\n", [append]),
 
             SumTime_R3 = lists:sum(NewState#config_state.buffertime_r3),
-            file:write_file("Benchmark", io_lib:fwrite("testing_formater_message_file AverageTime ~p ms\n", [SumTime_R3/101/1000]), [append]);
+            file:write_file("Benchmark", io_lib:fwrite("testing_formater_message_file AverageTime\n"
+                                                        "~p ms\n", [SumTime_R3/101/1000]), [append]);
         false ->
             ok
     end,

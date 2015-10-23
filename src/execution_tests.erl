@@ -10,7 +10,7 @@
 
 -module(execution_tests).
 
--export([clear/0, benchmark_test/0]).
+-export([benchmark_test/0]).
 
 %%%#########################################################################%%%
 %%Chronica
@@ -124,12 +124,5 @@ benchmark_test() ->
     chronica_test2(),
     file:write_file("Benchmark", "\n######################################################################################\n", [append]),
     lager_test2(),
-    io:format("test ok ~n").
-
-clear() ->
-    file:delete("fprof.trace"),
-    file:delete("callgrind.out.fprof"),
-    file:delete("chronica_ON_record_file.trace"),
-    file:delete("lager_ON_record_file.trace"),
-    file:delete("chronica_OFF_record_file.trace"),
-    file:delete("chronica_BINARY_record_file.trace").
+    io:format("test ok ~n"),
+    init:stop().

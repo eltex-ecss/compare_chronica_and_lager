@@ -17,15 +17,14 @@ start() ->
           supervisor:start_link({local,?MODULE}, ?MODULE, _Arg = [])
       end).
 
-
 start_link(Args) ->
     supervisor:start_link({local,?MODULE}, ?MODULE, Args).
 
 init([]) ->
-    {ok, {{one_for_one, 3, 10},
+    {ok, {{one_for_all, 3, 10},
         [{tag1,
             {testing_lager_logs, start_link, []},
-            permanent,
+            temporary,
             10000,
             worker,
             [testing_lager_logs]
@@ -33,7 +32,7 @@ init([]) ->
 
         {tag2,
             {testing_chronica_logs, start_link, []},
-            permanent,
+            temporary,
             10000,
             worker,
             [testing_chronica_logs]
@@ -41,7 +40,7 @@ init([]) ->
 
         {tag3,
             {server_perfomance, start_link, []},
-            permanent,
+            temporary,
             10000,
             worker,
             [server_perfomance]
