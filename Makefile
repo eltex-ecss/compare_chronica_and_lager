@@ -1,6 +1,6 @@
 .PHONY: deps compile release start
 
-all: deps compile release start
+all: clean deps compile release start
 
 deps:
 	rebar get-deps
@@ -16,4 +16,4 @@ start:
 
 clean:
 	rebar delete-deps
-	-rm -rf ebin
+	-rm -rf ebin ./release/sella
